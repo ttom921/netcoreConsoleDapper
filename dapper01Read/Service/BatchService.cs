@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using Serilog;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace GomoService
@@ -14,6 +15,7 @@ namespace GomoService
     {
         void WriteInformation(string input);
         Employee GetOne(int id);
+        IEnumerable<Employee> GetEmployees();
 
     }
     public class BatchService : IBatchService
@@ -41,14 +43,26 @@ namespace GomoService
             Console.WriteLine(_baseUrl);
             Console.WriteLine(_token);
             _logger.Information("log test");
-            var employee = GetOne(1);
-            Console.WriteLine("employee ->id: {0}, first_name: {1}, last_name:{2}", employee.id, employee.first_name, employee.last_name);
+            var myemployee = GetOne(1);
+            Console.WriteLine("employee ->id: {0}, first_name: {1}, last_name:{2}", myemployee.id, myemployee.first_name, myemployee.last_name);
+            Console.WriteLine("=================================");
+           var employees = GetEmployees();
+            foreach (var employee in employees)
+            {
+                Console.WriteLine("employee ->id: {0}, first_name: {1}, last_name:{2}", employee.id, employee.first_name, employee.last_name);
+            }
         }
 
         public Employee GetOne(int id)
         {
             var employee = _EmployeeRepository.Find(x => x.id == id);
             return employee;
+        }
+
+        public IEnumerable<Employee> GetEmployees()
+        {
+            var employees= _EmployeeRepository.FindAll();
+            return employees;
         }
     }
 }
