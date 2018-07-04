@@ -14,7 +14,6 @@ namespace Gomo.Repository
         : base(connection, sqlGenerator)
         {
 
-
         }
     }
 }

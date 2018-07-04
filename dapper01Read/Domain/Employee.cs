@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MicroOrm.Dapper.Repositories.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Gomo.Domain
 {
 
     [Table("employees")]
-    public class Employee
+    public partial class Employee
     {
+        //[Identity,Key]
+        [Identity]
         public int id { get; set; }
         public string company { get; set; }
         public string last_name { get; set; }

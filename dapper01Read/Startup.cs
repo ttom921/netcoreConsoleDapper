@@ -38,7 +38,6 @@ namespace GomoApp
             //Database connection
             var connectionString = Configuration["ConnectionStrings:GomoDatabase"];
             builder.Register(c => new MySqlConnection(connectionString)).As<IDbConnection>().InstancePerLifetimeScope();
-
             // sql config
             //builder.Register(c => new SqlGeneratorConfig() { SqlProvider = SqlProvider.MySQL, UseQuotationMarks = true }).As<SqlGeneratorConfig>().SingleInstance();
             //Sql generators
